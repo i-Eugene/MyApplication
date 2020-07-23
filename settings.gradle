@@ -1,0 +1,4 @@
+include ':resourseLibrary'
+include ':customrecyclerview'
+include ':app'
+rootProject.name = "My Application"
