@@ -32,8 +32,8 @@ public class CustomRecyclerView extends RecyclerView {
 
     public CustomRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.DPRecyclerView);
-        float radius = typedArray.getDimension(R.styleable.DPRecyclerView_radius, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomRecyclerView);
+        float radius = typedArray.getDimension(R.styleable.CustomRecyclerView_radius, 0);
         typedArray.recycle();
         path = new Path();
         drawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
