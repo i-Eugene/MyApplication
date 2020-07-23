@@ -3,12 +3,11 @@ package com.ieugene.customrecyclerview.dprecyclerview;
 import android.graphics.Rect;
 import android.view.View.MeasureSpec;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DPImgLayoutManager extends RecyclerView.LayoutManager {
+public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
 
     private int singleMaxHeight, singleMinHeight;
     private int twoColumn, threeColumn;
@@ -57,20 +56,17 @@ public class DPImgLayoutManager extends RecyclerView.LayoutManager {
         int height = 0;
         int count = getItemCount();
 
-        View[] child = new View[count];
-        for (int i = 0; i < count; i++) {
-            child[i] = getChildView(recycler, i);
-        }
+        View child = getChildView(recycler, 0);
 
         calculateDefaultValue(recycler, count);
 
         if (count == 1) {
-            if (child[0].getMeasuredHeight() > singleMaxHeight) {
+            if (child.getMeasuredHeight() > singleMaxHeight) {
                 height = singleMaxHeight;
-            } else if (child[0].getMeasuredHeight() < singleMinHeight) {
+            } else if (child.getMeasuredHeight() < singleMinHeight) {
                 height = singleMinHeight;
             } else {
-                height = child[0].getMeasuredHeight();
+                height = child.getMeasuredHeight();
             }
         } else if (count == 2) {
             height = twoColumn;

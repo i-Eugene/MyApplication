@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ieugene.customrecyclerview.adapter.CustomRecyclerAdapter;
-import com.ieugene.customrecyclerview.dprecyclerview.DPImgDecoration;
-import com.ieugene.customrecyclerview.dprecyclerview.DPImgLayoutManager;
+import com.ieugene.customrecyclerview.dprecyclerview.CustomImgDecoration;
+import com.ieugene.customrecyclerview.dprecyclerview.CustomImgLayoutManager;
 import com.ieugene.customrecyclerview.dprecyclerview.CustomRecyclerView;
 
 public class TestRecyclerViewActivity extends AppCompatActivity {
@@ -59,8 +59,8 @@ public class TestRecyclerViewActivity extends AppCompatActivity {
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.custom_recyclerview);
-            recyclerView.addItemDecoration(new DPImgDecoration(30,30));
-            recyclerView.setLayoutManager(new DPImgLayoutManager());
+            recyclerView.addItemDecoration(new CustomImgDecoration(30,30));
+            recyclerView.setLayoutManager(new CustomImgLayoutManager());
         }
 
     }

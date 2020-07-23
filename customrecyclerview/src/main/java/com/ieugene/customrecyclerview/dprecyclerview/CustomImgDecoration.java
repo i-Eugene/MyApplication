@@ -7,14 +7,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DPImgDecoration extends RecyclerView.ItemDecoration {
+public class CustomImgDecoration extends RecyclerView.ItemDecoration {
     private int decorationWidth, decorationHeight;
     private Drawable drawable;
 
-    public DPImgDecoration() {
+    public CustomImgDecoration() {
     }
 
-    public DPImgDecoration(int decorationWidth, int decorationHeight) {
+    public CustomImgDecoration(int decorationWidth, int decorationHeight) {
         this.decorationWidth = decorationWidth;
         this.decorationHeight = decorationHeight;
     }

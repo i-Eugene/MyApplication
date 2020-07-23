@@ -38,7 +38,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
             params.height = 200;
             holder.imageView.setLayoutParams(params);
         }
-        holder.imageView.setImageResource(com.ieugene.resourselibrary.R.drawable.timg);
+        holder.imageView.setImageResource(com.ieugene.resourselibrary.R.mipmap.ic_launcher);
     }
 
     @Override
