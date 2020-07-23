@@ -65,12 +65,12 @@ public class DPImgLayoutManager extends RecyclerView.LayoutManager {
         calculateDefaultValue(recycler, count);
 
         if (count == 1) {
-            if (((ImageView)child[0]).getDrawable().getIntrinsicHeight() > singleMaxHeight) {
+            if (child[0].getMeasuredHeight() > singleMaxHeight) {
                 height = singleMaxHeight;
-            } else if (((ImageView)child[0]).getDrawable().getIntrinsicHeight() < singleMinHeight) {
+            } else if (child[0].getMeasuredHeight() < singleMinHeight) {
                 height = singleMinHeight;
             } else {
-                height = ((ImageView)child[0]).getDrawable().getIntrinsicHeight();
+                height = child[0].getMeasuredHeight();
             }
         } else if (count == 2) {
             height = twoColumn;
@@ -147,12 +147,12 @@ public class DPImgLayoutManager extends RecyclerView.LayoutManager {
     private void layoutSingleView(RecyclerView.Recycler recycler, RecyclerView.State state) {
         View child = getChildView(recycler, 0);
         int h;
-        if (((ImageView)child).getDrawable().getIntrinsicHeight() > singleMaxHeight) {
+        if (child.getMeasuredHeight() > singleMaxHeight) {
             h = singleMaxHeight;
-        } else if (((ImageView)child).getDrawable().getIntrinsicHeight() < singleMinHeight) {
+        } else if (child.getMeasuredHeight() < singleMinHeight) {
             h = singleMinHeight;
         } else {
-            h = ((ImageView)child).getDrawable().getIntrinsicHeight();
+            h = child.getMeasuredHeight();
         }
         layoutDecoratedWithMargins(child, 0, 0, 2 * (twoColumn + decorationH), h + decorationH);
     }

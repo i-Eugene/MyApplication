@@ -30,6 +30,14 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        if (count == 1) {
+            ViewGroup.LayoutParams params = holder.imageView.getLayoutParams();
+            if (params == null) {
+                params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+            }
+            params.height = 200;
+            holder.imageView.setLayoutParams(params);
+        }
         holder.imageView.setImageResource(com.ieugene.resourselibrary.R.drawable.timg);
     }
 
