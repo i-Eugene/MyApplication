@@ -2,10 +2,14 @@ package com.ieugene.customrecyclerview.dprecyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
@@ -17,10 +21,11 @@ import com.ieugene.customrecyclerview.R;
 
 
 public class CustomRecyclerView extends RecyclerView {
-    private Path path;
     private PaintFlagsDrawFilter drawFilter;
     private RectF rectF = new RectF();
-    private float[] radii;
+    private Paint paint;
+    private PorterDuffXfermode porterDuffXfermode;
+    private float radius;
 
     public CustomRecyclerView(@NonNull Context context) {
         this(context, null);
@@ -33,25 +38,34 @@ public class CustomRecyclerView extends RecyclerView {
     public CustomRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomRecyclerView);
-        float radius = typedArray.getDimension(R.styleable.CustomRecyclerView_radius, 0);
+        radius = typedArray.getDimension(R.styleable.CustomRecyclerView_radius, 0);
         typedArray.recycle();
-        path = new Path();
+
         drawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
         setLayerType(LAYER_TYPE_HARDWARE, null);
-        radii = new float[8];
-        for (int i = 0; i < 8; i++) {
-            radii[i] = radius;
-        }
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.WHITE);
+        paint.setStyle(Paint.Style.FILL);
+        porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
     }
 
     @Override
-    public void onDraw(Canvas c) {
-        path.reset();
-        path.addRoundRect(rectF, radii, Path.Direction.CW);
-        c.setDrawFilter(drawFilter);
-        c.clipPath(path);
-        super.onDraw(c);
+    protected void dispatchDraw(Canvas canvas) {
+        drawCorner(canvas);
+    }
 
+    private void drawCorner(Canvas canvas) {
+        canvas.setDrawFilter(drawFilter);
+        int sc = canvas.saveLayer(0F, 0F, canvas.getWidth(), canvas.getHeight(), null, Canvas.ALL_SAVE_FLAG);
+        super.dispatchDraw(canvas);
+        Bitmap mask = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas newCanvas = new Canvas(mask);
+        newCanvas.drawRoundRect(rectF, radius, radius, paint);
+        paint.setXfermode(porterDuffXfermode);
+        canvas.drawBitmap(mask, 0F, 0F, paint);
+        paint.setXfermode(null);
+        canvas.restoreToCount(sc);
     }
 
     @Override
