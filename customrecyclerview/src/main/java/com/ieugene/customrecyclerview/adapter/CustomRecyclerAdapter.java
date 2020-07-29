@@ -25,7 +25,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.item_custom_recyclerview, null));
+        return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.item_custom_recyclerview, parent,false));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
             params.height = 220;
             holder.itemView.setLayoutParams(params);
         }
-        holder.imageView.setImageResource(com.ieugene.resourselibrary.R.mipmap.ic_launcher);
+        holder.imageView.setImageResource(com.ieugene.resourselibrary.R.drawable.timg);
     }
 
     @Override

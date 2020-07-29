@@ -1,4 +1,5 @@
-include ':resourseLibrary'
+include ':FlowLayout'
+include ':resourceLibrary'
 include ':customrecyclerview'
 include ':app'
 rootProject.name = "My Application"
