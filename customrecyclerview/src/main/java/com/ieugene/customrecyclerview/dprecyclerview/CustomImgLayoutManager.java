@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
 
     private int singleMaxHeight, singleMinHeight;
@@ -19,9 +18,17 @@ public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public void onMeasure(@NonNull RecyclerView.Recycler recycler, @NonNull RecyclerView.State state, int widthSpec, int heightSpec) {
-        width = measureWidth(widthSpec);
-        int height = measureHeight(recycler, heightSpec);
-        setMeasuredDimension(width, height);
+//        Log.d(getClass().getSimpleName(),
+//                "RecyclerView.State isPreLayout=" + state.isPreLayout()
+//                        + ", didStructureChange=" + state.didStructureChange()
+//                        + ", isMeasuring=" + state.isMeasuring());
+        if (state.didStructureChange()) {
+            width = measureWidth(widthSpec);
+            int height = measureHeight(recycler, heightSpec);
+            setMeasuredDimension(width, height);
+        } else {
+            setMeasuredDimension(getWidth(), getHeight());
+        }
     }
 
     private int measureWidth(int measureSpec) {
@@ -58,12 +65,12 @@ public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
     private int getAtMostHeight(@NonNull RecyclerView.Recycler recycler) {
         int height = 0;
         int count = getItemCount();
-        View[] children = addChildren(recycler, count);
         calculateDefaultValue(recycler, count);
-        for (int i = 0; i < count; i++) {
-            children[i] = measureChildren(children, count, i);
-        }
+
         if (count == 1) {
+            View[] children = new View[]{recycler.getViewForPosition(0)};
+            addView(children[0]);
+            children[0] = measureChildren(children, count, 0);
             height = getSingleHeight(children[0]);
         } else if (count == 2) {
             height = twoColumn;
@@ -92,7 +99,7 @@ public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
         int height;
         ViewGroup.LayoutParams params = child.getLayoutParams();
         if (params == null) {
-            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }
         if (child.getMeasuredHeight() > singleMaxHeight) {
             height = singleMaxHeight;
@@ -127,7 +134,7 @@ public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
         threeColumn = (width - decorationW * 2) / 3;
         singleMaxHeight = twoColumn + (threeColumn + decorationH) * 3;
         singleMinHeight = twoColumn;
-        Log.d(getClass().getSimpleName(), "itemCount=" + itemCount + ", singleMinHeight=" + singleMinHeight + ", decorationW=" + decorationW + ", decorationH=" + decorationH + ", twoColumn=" + twoColumn + ", threeColumn=" + threeColumn + ", width=" + width);
+//        Log.d(getClass().getSimpleName(), "itemCount=" + itemCount + ", singleMinHeight=" + singleMinHeight + ", decorationW=" + decorationW + ", decorationH=" + decorationH + ", twoColumn=" + twoColumn + ", threeColumn=" + threeColumn + ", width=" + width);
     }
 
     private View measureChildren(View[] children, int count, int index) {
@@ -212,7 +219,7 @@ public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
             removeAndRecycleAllViews(recycler);
             return;
         }
-        if (getChildCount() == 0 && state.isPreLayout()) {
+        if (getChildCount() == 0 && state.isPreLayout() || !state.didStructureChange()) {
             return;
         }
         detachAndScrapAttachedViews(recycler);
@@ -445,7 +452,7 @@ public class CustomImgLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public boolean isAutoMeasureEnabled() {
-        return super.isAutoMeasureEnabled();
+        return false;
     }
 
     @Override
