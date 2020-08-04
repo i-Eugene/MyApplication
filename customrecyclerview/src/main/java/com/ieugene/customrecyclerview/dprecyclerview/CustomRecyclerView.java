@@ -56,11 +56,6 @@ public class CustomRecyclerView extends RecyclerView {
     }
 
     private void drawCorner(Canvas canvas) {
-<<<<<<< HEAD
-//        canvas.setDrawFilter(drawFilter);
-=======
-        canvas.setDrawFilter(drawFilter);
->>>>>>> d2181e82b35b7a6ffe57cde4115327e6ef26868d
         int sc = canvas.saveLayer(0F, 0F, canvas.getWidth(), canvas.getHeight(), null, Canvas.ALL_SAVE_FLAG);
         super.dispatchDraw(canvas);
         Bitmap mask = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
