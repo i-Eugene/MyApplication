@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="roll">Roll</string>
+    <string name="hello_world">Hello World</string>
+    <string name="dice_rolled">Dice Rolled!</string>
+    <string name="count_up">count up</string>
+</resources>

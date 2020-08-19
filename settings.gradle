@@ -1,3 +1,4 @@
+include ':KotlinLab'
 include ':FlowLayout'
 include ':resourceLibrary'
 include ':customrecyclerview'

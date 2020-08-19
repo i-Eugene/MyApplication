@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ieugene.kotlinlab">
+
+    <application>
+        <activity android:name=".KotlinActivity"></activity>
+    </application>
+</manifest>
