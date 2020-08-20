@@ -7,26 +7,37 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.ieugene.kotlinlab.bean.MyName
+import com.ieugene.kotlinlab.databinding.ActivityKotlinBinding
 
 class KotlinActivity : AppCompatActivity() {
 
+    private val myName = MyName("Aleks Haecky")
+
+    private lateinit var binding: ActivityKotlinBinding
+
     //    private lateinit var textView: TextView
-    private lateinit var imageView: ImageView
+//    private lateinit var imageView: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin)
-        val button = findViewById<Button>(R.id.button)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_kotlin)
+
+        binding.myName = this.myName
+
+//        val button = findViewById<Button>(R.id.button)
 //        textView = findViewById(R.id.text_view)
 //        textView.text = getString(R.string.dice_rolled)
-        button.setOnClickListener { showToast() }
-        findViewById<Button>(R.id.count_up).setOnClickListener {
+        binding.button.setOnClickListener { showToast() }
+        binding.countUp.setOnClickListener {
 //            val digits = textView.text
 //            textView.text = digits.toString().toInt().inc().toString()
 
             startActivity(Intent(this, KotlinDrawerActivity::class.java))
         }
 
-        imageView = findViewById(R.id.dice_image)
+//        imageView = findViewById(R.id.dice_image)
     }
 
     private fun showToast() {
@@ -39,8 +50,14 @@ class KotlinActivity : AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
-        imageView.setImageResource(drawableResource)
+        binding.diceImage.setImageResource(drawableResource)
 //        textView.text = randomInt.toString()
-        Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
+//        binding.textView.text = randomInt.toString()
+        binding.apply {
+            myName?.name = randomInt.toString()
+            invalidateAll()
+        }
+
+        Toast.makeText(this, binding.myName?.name, Toast.LENGTH_SHORT).show()
     }
 }
