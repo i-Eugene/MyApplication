@@ -1,5 +1,6 @@
 package com.ieugene.kotlinlab
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -21,6 +22,8 @@ class KotlinActivity : AppCompatActivity() {
         findViewById<Button>(R.id.count_up).setOnClickListener {
 //            val digits = textView.text
 //            textView.text = digits.toString().toInt().inc().toString()
+
+            startActivity(Intent(this, KotlinDrawerActivity::class.java))
         }
 
         imageView = findViewById(R.id.dice_image)
