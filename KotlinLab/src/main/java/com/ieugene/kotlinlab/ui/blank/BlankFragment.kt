@@ -1,14 +1,19 @@
 package com.ieugene.kotlinlab.ui.blank
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.findNavController
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.ieugene.kotlinlab.R
+import com.ieugene.kotlinlab.databinding.BlankFragmentBinding
+import timber.log.Timber
 
 class BlankFragment : Fragment() {
 
@@ -17,20 +22,39 @@ class BlankFragment : Fragment() {
     }
 
     private lateinit var viewModel: BlankViewModel
+    private lateinit var binding: BlankFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.blank_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.blank_fragment, container, false)
+        viewModel.score.observe(viewLifecycleOwner, Observer {
+            binding.textView.text = it.toString()
+            Toast.makeText(context,"observer data $it",Toast.LENGTH_SHORT).show()
+        })
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.findViewById<TextView>(R.id.text_view).setOnClickListener { view.findNavController().navigate(R.id.homeFragment) }
+        binding.textView.setOnClickListener {
+//            view.findNavController().navigate(R.id.homeFragment)
+            viewModel.score.value?.inc()
+            viewModel.onSkip()
+            binding.apply {
+
+//                invalidateAll()
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(BlankViewModel::class.java)
+        Timber.i("Called ViewModelProvider.get${viewModel}")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(BlankViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
 
 }
