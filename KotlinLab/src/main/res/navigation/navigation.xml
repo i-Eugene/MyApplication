@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/blankFragment"
-        android:name="com.ieugene.kotlinlab.BlankFragment"
+        android:name="com.ieugene.kotlinlab.ui.blank.BlankFragment"
         android:label="blank_fragment"
         tools:layout="@layout/blank_fragment" />
 

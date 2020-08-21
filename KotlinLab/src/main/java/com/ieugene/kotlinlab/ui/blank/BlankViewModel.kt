@@ -1,4 +1,4 @@
-package com.ieugene.kotlinlab
+package com.ieugene.kotlinlab.ui.blank
 
 import androidx.lifecycle.ViewModel
 

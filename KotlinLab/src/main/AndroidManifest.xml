@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ieugene.kotlinlab">
 
-    <application>
+    <application android:name=".app.KotlinApp">
         <activity
             android:name=".KotlinDrawerActivity"
             android:label="@string/title_activity_kotlin_drawer"

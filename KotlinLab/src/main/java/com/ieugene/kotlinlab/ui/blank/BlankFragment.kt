@@ -1,4 +1,4 @@
-package com.ieugene.kotlinlab
+package com.ieugene.kotlinlab.ui.blank
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
+import com.ieugene.kotlinlab.R
 
 class BlankFragment : Fragment() {
 

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.ieugene.kotlinlab.bean.MyName
 import com.ieugene.kotlinlab.databinding.ActivityKotlinBinding
+import timber.log.Timber
 
 class KotlinActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class KotlinActivity : AppCompatActivity() {
 //    private lateinit var imageView: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Timber.i("onCreate called!")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kotlin)
 
         binding.myName = this.myName
@@ -38,6 +39,34 @@ class KotlinActivity : AppCompatActivity() {
         }
 
 //        imageView = findViewById(R.id.dice_image)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.v("onResume Called")
+        Timber.d("onResume Called")
+        Timber.i("onResume Called")
+        Timber.w("onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.i("onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.i("onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.i("onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Timber.i("onRestart Called")
     }
 
     private fun showToast() {
