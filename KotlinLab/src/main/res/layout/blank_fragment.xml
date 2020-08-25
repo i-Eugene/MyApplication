@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="blankViewModel"
+            type="com.ieugene.kotlinlab.ui.blank.BlankViewModel" />
     </data>
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Hello" />
+            android:onClick="@{()->blankViewModel.onSkip()}"
+            android:text="@{String.valueOf(blankViewModel.score)}" />
 
     </FrameLayout>
 </layout>
