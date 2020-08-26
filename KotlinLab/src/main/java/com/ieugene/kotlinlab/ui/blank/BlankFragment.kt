@@ -9,10 +9,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ieugene.kotlinlab.R
 import com.ieugene.kotlinlab.bean.MyName
+import com.ieugene.kotlinlab.database.SleepDatabase
+import com.ieugene.kotlinlab.database.SleepNight
 import com.ieugene.kotlinlab.databinding.BlankFragmentBinding
 import timber.log.Timber
 
@@ -48,6 +51,24 @@ class BlankFragment : Fragment() {
 ////                invalidateAll()
 //            }
 //        }
+        Thread {
+            val dataBase = SleepDatabase.getInstance(view.context)
+//            dataBase.sleepDataBaseDao.insert(SleepNight())
+//            dataBase.sleepDataBaseDao.insert(SleepNight())
+//            dataBase.sleepDataBaseDao.insert(SleepNight())
+//            dataBase.sleepDataBaseDao.insert(SleepNight())
+//            dataBase.sleepDataBaseDao.insert(SleepNight())
+
+        }.start()
+        val dataBase = SleepDatabase.getInstance(view.context)
+        val liveData = dataBase.sleepDataBaseDao.getAllNights()
+        println("nightId=${liveData.value?.size}")
+        val list = liveData.value
+        liveData.observe(viewLifecycleOwner, Observer { list ->
+            list?.forEach { sleepNight ->
+                println("nightId==${sleepNight.nightId}")
+            }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
