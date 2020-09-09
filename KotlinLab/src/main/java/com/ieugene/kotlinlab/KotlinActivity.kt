@@ -23,6 +23,7 @@ class KotlinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.i("onCreate called!")
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kotlin)
 
         binding.myName = this.myName

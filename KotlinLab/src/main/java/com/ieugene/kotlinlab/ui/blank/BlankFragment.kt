@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ieugene.kotlinlab.R
 import com.ieugene.kotlinlab.bean.MyName
+import com.ieugene.kotlinlab.database.SleepDataBaseDao
 import com.ieugene.kotlinlab.database.SleepDatabase
 import com.ieugene.kotlinlab.database.SleepNight
 import com.ieugene.kotlinlab.databinding.BlankFragmentBinding
@@ -31,11 +32,12 @@ class BlankFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        viewModel = BlankViewModelFactory(requireNotNull(activity).application,SleepDatabase.getInstance(requireNotNull(activity)).sleepDataBaseDao).create(BlankViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.blank_fragment, container, false)
         binding.blankViewModel = this.viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.score.observe(viewLifecycleOwner, Observer {
-            binding.textView.text = it.toString()
+//            binding.textView.text = it.toString()
 //            Toast.makeText(context,"observer data $it",Toast.LENGTH_SHORT).show()
         })
         return binding.root
@@ -73,8 +75,8 @@ class BlankFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BlankViewModel::class.java)
-        Timber.i("Called ViewModelProvider.get${viewModel}")
+
+//        Timber.i("Called ViewModelProvider.get${viewModel}")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
