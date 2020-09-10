@@ -29,6 +29,7 @@ class HomeViewModel : ViewModel() {
 
     fun onFabClicked() {
         _navigateToSearch.value = true
+        println("Fab Clicked")
     }
 
     fun onNavigatedToSearch() {
