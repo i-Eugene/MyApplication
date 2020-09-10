@@ -19,7 +19,7 @@ interface ApiService {
 }
 
 object Api {
-//    val retrofitService : ApiService by Lazy {
-//        retrofit.create(ApiService::class.java)
-//    }
+    val retrofitService : ApiService by lazy {
+        retrofit.create(ApiService::class.java)
+    }
 }

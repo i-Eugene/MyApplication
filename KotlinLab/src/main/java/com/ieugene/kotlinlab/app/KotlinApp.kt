@@ -2,6 +2,7 @@ package com.ieugene.kotlinlab.app
 
 import android.app.Application
 import android.util.Log
+import androidx.multidex.MultiDexApplication
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-class KotlinApp : Application() {
+class KotlinApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 //        Timber.plant(LogTree())

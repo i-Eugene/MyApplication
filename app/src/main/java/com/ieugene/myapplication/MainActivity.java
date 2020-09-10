@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter.add("Test DPRecyclerView");
         arrayAdapter.add("Test FlowLayout");
         arrayAdapter.add("Test Kotlin");
+        arrayAdapter.add("Test styleLab");
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                     clazz = TestFlowLayoutActivity.class;
                 } else if (position == 2) {
                     clazz = KotlinActivity.class;
+                } else if (position == 3) {
+                    clazz = com.ieugene.stylelab.MainActivity.class;
                 }
                 if (clazz != null)
                     startActivity(new Intent(MainActivity.this, clazz));

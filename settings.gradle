@@ -1,3 +1,4 @@
+include ':stylelab'
 include ':KotlinLab'
 include ':FlowLayout'
 include ':resourceLibrary'
