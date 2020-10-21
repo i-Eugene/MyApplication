@@ -1,3 +1,4 @@
+include ':composeLab'
 include ':stylelab'
 include ':KotlinLab'
 include ':FlowLayout'

@@ -11,11 +11,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ieugene.customrecyclerview.adapter.CustomRecyclerAdapter;
 import com.ieugene.customrecyclerview.dprecyclerview.CustomImgDecoration;
 import com.ieugene.customrecyclerview.dprecyclerview.CustomImgLayoutManager;
 import com.ieugene.customrecyclerview.dprecyclerview.CustomRecyclerView;
+
+import java.util.Locale;
 
 public class TestRecyclerViewActivity extends AppCompatActivity {
 
@@ -26,13 +29,43 @@ public class TestRecyclerViewActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Adapter adapter = new Adapter(this);
-        recyclerView.setAdapter(adapter);
-        DividerItemDecoration decoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
+//        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(new DebugAdapter());
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decoration);
+    }
+
+    private static class DebugAdapter extends RecyclerView.Adapter<DebugHolder> {
+
+        @NonNull
+        @Override
+        public DebugHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new DebugHolder(new TextView(parent.getContext()));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull DebugHolder holder, int position) {
+            holder.textView.setText(String.format(Locale.getDefault(), "Position: %d", position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return 10;
+        }
+    }
+
+    private static class DebugHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+
+        public DebugHolder(@NonNull View itemView) {
+            super(itemView);
+            textView = (TextView) itemView;
+        }
     }
 
     private static class Adapter extends RecyclerView.Adapter<ItemHolder> {
         Context context;
+
         public Adapter(Context context) {
             this.context = context;
         }
@@ -56,10 +89,11 @@ public class TestRecyclerViewActivity extends AppCompatActivity {
 
     private static class ItemHolder extends RecyclerView.ViewHolder {
         CustomRecyclerView recyclerView;
+
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.custom_recyclerview);
-            recyclerView.addItemDecoration(new CustomImgDecoration(30,30));
+            recyclerView.addItemDecoration(new CustomImgDecoration(30, 30));
             recyclerView.setLayoutManager(new CustomImgLayoutManager());
         }
 

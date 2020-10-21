@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.ieugene.myapplication"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -37,6 +37,7 @@ dependencies {
     implementation project(":FlowLayout")
     implementation project(":KotlinLab")
     implementation project(":stylelab")
+    implementation project(":composeLab")
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

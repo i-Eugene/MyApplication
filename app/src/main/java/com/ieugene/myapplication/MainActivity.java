@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.ieugene.composelab.ComposeLabActivity;
 import com.ieugene.customrecyclerview.TestRecyclerViewActivity;
 import com.ieugene.flowlayout.TestFlowLayoutActivity;
 import com.ieugene.kotlinlab.KotlinActivity;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter.add("Test FlowLayout");
         arrayAdapter.add("Test Kotlin");
         arrayAdapter.add("Test styleLab");
+        arrayAdapter.add("Test Compose");
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                     clazz = KotlinActivity.class;
                 } else if (position == 3) {
                     clazz = com.ieugene.stylelab.MainActivity.class;
+                } else if (position == 4) {
+                    clazz = ComposeLabActivity.class;
                 }
                 if (clazz != null)
                     startActivity(new Intent(MainActivity.this, clazz));
